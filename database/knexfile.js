@@ -1,6 +1,6 @@
 module.exports = {
   development: {
     client: "pg",
-    connection: "postgres://localhost/opga",
+    connection: "postgres://admin:admin@localhost/opga",
   },
 };
