@@ -13,11 +13,21 @@
       dolore provident alias.
     </p>
     <p class="lead">
-      <a class="btn btn-primary btn-lg" href="#" role="button">U SUK</a>
+      <a class="btn btn-primary btn-lg" :href="getLoginURL" role="button">Login with Google</a>
     </p>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'home',
+  computed: {
+    getLoginURL() {
+      if (window.location.hostname === 'localhost') {
+        return 'http://localhost:3000/auth/google';
+      }
+      return 'https://opga-api.tcousin.com/auth/google';
+    },
+  },
+};
 </script>
