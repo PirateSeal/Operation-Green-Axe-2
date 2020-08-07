@@ -18,8 +18,6 @@ const routes = [
     beforeEnter(to, from, next) {
       if (store.getters.isLoggedIn) {
         next('/Home');
-      } else {
-        next('/');
       }
     },
   },
