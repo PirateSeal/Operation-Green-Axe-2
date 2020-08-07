@@ -11,7 +11,7 @@ on:
 
 jobs:
   test:
-    name: "${{ matrix.os }} -> ${{ matrix.working-directory }} : node ${{ matrix.node_version }} "
+    name: "${{ matrix.os }} -> ${{ matrix.working-directory }} : node ${{ matrix.node-version }} "
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
