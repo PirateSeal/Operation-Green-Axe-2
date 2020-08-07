@@ -12,19 +12,24 @@
       aspernatur saepe distinctio ea, sit animi autem ex excepturi repellendus a corrupti iste
       dolore provident alias.
     </p>
+
+    <div>
+      <h1>Holà que tàl ? u suk biatch</h1>
+      <img :src="user.image_url" alt srcset />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'home',
-  computed: {
-    getLoginURL() {
-      if (window.location.hostname === 'localhost') {
-        return 'http://localhost:3000/auth/google';
-      }
-      return 'https://opga-api.tcousin.com/auth/google';
-    },
+  data() {
+    return {
+      user: {},
+    };
+  },
+  mounted() {
+    this.user = this.$store.getters.isLoggedIn;
   },
 };
 </script>

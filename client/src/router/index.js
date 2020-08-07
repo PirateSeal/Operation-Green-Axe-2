@@ -15,13 +15,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    beforeEnter(to, from, next) {
-      if (store.getters.isLoggedIn) {
-        next('/Home');
-      } else {
-        next('/');
-      }
-    },
   },
   {
     path: '/login/token/:token',
