@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 function create(user) {
-  console.log('sigining with secret', process.env.TOKEN_SECRET);
-
   return new Promise((resolve, reject) => {
     jwt.sign(
       user,

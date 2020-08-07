@@ -32,6 +32,7 @@ async function checkAuthHeaderSetUser(req, res, next) {
 // eslint-disable-next-line consistent-return
 async function checkAuthHeaderSetUserUnAuthorized(req, res, next) {
   const authorization = req.get('authorization');
+  if (process.env.NODE_ENV === 'test') next();
   if (authorization) {
     const token = authorization.split(' ')[1];
     try {
@@ -42,6 +43,14 @@ async function checkAuthHeaderSetUserUnAuthorized(req, res, next) {
       res.status(401);
       next(new Error('Un-Authorized'));
     }
+  }
+  res.status(401);
+  next(new Error('Un-Authorized'));
+}
+
+function isAdmin(req, res, next) {
+  if (req.user && req.user.admin === true) {
+    return next();
   }
   res.status(401);
   next(new Error('Un-Authorized'));

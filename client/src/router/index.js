@@ -25,6 +25,13 @@ const routes = [
     path: '/Home',
     name: 'HomeLogged',
     component: HomeLogged,
+    beforeEnter(to, from, next) {
+      if (store.getters.isLoggedIn) {
+        next();
+      } else {
+        next('/');
+      }
+    },
   },
   {
     path: '/Admin',

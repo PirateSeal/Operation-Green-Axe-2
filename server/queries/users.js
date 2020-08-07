@@ -13,6 +13,9 @@ const schema = Joi.object().keys({
 });
 
 module.exports = {
+  findAll() {
+    return db('users').select();
+  },
   findAdmins() {
     return db('users').where('role_id', 3);
   },

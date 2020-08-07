@@ -14,7 +14,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav mr-auto">
-        <li :class="'nav-item', ">
+        <li :class="'nav-item' ">
           <a class="nav-link" :href="warRoom">War Room</a>
         </li>
         <li class="nav-item">
@@ -51,9 +51,9 @@ export default {
     ...mapGetters({ isAdmin: 'isAdmin' }),
     host() {
       if (window.location.hostname === 'localhost') {
-        return 'http://localhost:8080/';
+        return 'http://localhost:8080/#/';
       }
-      return 'https://opga.tcousin.com/';
+      return 'https://opga.tcousin.com/#/';
     },
     CurrentPage() {
       return this.$route.path;

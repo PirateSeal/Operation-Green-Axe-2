@@ -1,5 +1,7 @@
 const Joi = require('joi');
-const db = require('../database');
+const db = require('../../database');
+
+const { insertIntoTableAndValidate } = require('../index');
 
 const schema = Joi.object().keys({
   name: Joi.string().min(3).max(30).required(),
@@ -7,24 +9,23 @@ const schema = Joi.object().keys({
 });
 
 module.exports = {
-  findById(id) {
-    return db('roles').where('id', id).first();
+  findAll() {
+    return db('roles').select();
   },
-  findName(name) {
+  findByName(name) {
     return db('roles').where('name', name).first();
   },
-  findAll() {
-    return db('roles');
+  findById(id) {
+    return db('roles').where('id', id).first();
   },
   async update(id, role) {
     const rows = await db('roles').where('id', id).update(role, '*');
     return rows[0];
   },
+  async delete(id) {
+    return db('roles').where('id', id).del();
+  },
   insert(role) {
-    const result = schema.validate(role);
-    if (result.error === null || result.error === undefined) {
-      return db('roles').insert(role);
-    }
-    return Promise.reject(result.error);
+    return insertIntoTableAndValidate('roles', role, schema);
   },
 };
