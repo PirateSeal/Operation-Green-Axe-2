@@ -1,4 +1,5 @@
-**/result.json
+tests/results/
+
 # Logs
 logs
 *.log
