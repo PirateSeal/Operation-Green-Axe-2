@@ -6,7 +6,7 @@ function notFound(req, res, next) {
   next(error);
 }
 
-function errorHandler(error, req, res, next) {
+function errorHandler(error, req, res) {
   res.status(res.statusCode || 500);
   res.json({
     message: error.message,
@@ -23,12 +23,13 @@ async function checkAuthHeaderSetUser(req, res, next) {
       const user = await verify(token);
       req.user = user;
     } catch (error) {
-      console.log(error);
+      next(new Error('Not connected'));
     }
   }
   next();
 }
 
+// eslint-disable-next-line consistent-return
 async function checkAuthHeaderSetUserUnAuthorized(req, res, next) {
   const authorization = req.get('authorization');
   if (authorization) {
