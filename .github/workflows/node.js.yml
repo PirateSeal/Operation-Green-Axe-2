@@ -24,6 +24,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+        env:
+          GOOGLE_CLIENT_ID: ${{secrets.GGL_LOG}}
+          GOOGLE_CLIENT_SECRET: ${{secrets.GGL_SECRET}}
+          TOKEN_SECRET: ${{secrets.TOKEN_SECRET}}
+          JWT_TOKEN: ${{secrets.JWT_TOKEN}}
+          POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+          POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+          POSTGRES_DB: ${{secrets.POSTGRES_DB}}
       - run: |
           cd ${{matrix.working-directory}}
           yarn
