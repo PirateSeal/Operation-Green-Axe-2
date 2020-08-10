@@ -14,7 +14,6 @@ function errorHandler(error, req, res) {
   });
 }
 
-// 5:53:00
 async function checkAuthHeaderSetUser(req, res, next) {
   const authorization = req.get('authorization');
   if (authorization) {
