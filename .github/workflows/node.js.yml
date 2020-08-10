@@ -14,12 +14,12 @@ defaults:
 
 jobs:
   test:
-    name: "${{ matrix.os }} -> ${{ matrix.working-directory }} : node ${{ matrix.node-version }} "
+    name: "${{ matrix.os }} -> node ${{ matrix.node-version }} "
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v2
@@ -27,18 +27,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-        name: Create database
       - run : docker-compose up -d
         working-directory: server/database
         env: 
           POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
           POSTGRES_USER: ${{secrets.POSTGRES_USER}}
           POSTGRES_DB: ${{secrets.POSTGRES_DB}}
+        name: Create database
         
-        name: install dependencies
       - run: yarn
+        name: install dependencies
       
-        name: run tests
       - run: yarn test
         env:
           GOOGLE_CLIENT_ID: ${{secrets.GGL_LOG}}
@@ -48,4 +47,5 @@ jobs:
           POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
           POSTGRES_USER: ${{secrets.POSTGRES_USER}}
           POSTGRES_DB: ${{secrets.POSTGRES_DB}}
+        name: run tests
           
