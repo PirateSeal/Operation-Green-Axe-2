@@ -24,6 +24,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - run : |
+          cd ${{matrix.working-directory}}/database
+          docker-compose up -d POSTGRES_PASSWORD=${{secrets.POSTGRES_PASSWORD}} POSTGRES_USER=${{secrets.POSTGRES_USER}} POSTGRES_DB=${{secrets.POSTGRES_DB}}
       - run: |
           cd ${{matrix.working-directory}}
           yarn
@@ -36,3 +39,4 @@ jobs:
           POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
           POSTGRES_USER: ${{secrets.POSTGRES_USER}}
           POSTGRES_DB: ${{secrets.POSTGRES_DB}}
+          
