@@ -6,15 +6,6 @@ const { checkAuthHeaderSetUserUnAuthorized } = require('../middlewares');
 
 const roles = require('../queries/Teams/roles');
 
-router.get('/', async (req, res, next) => {
-  try {
-    const all = await roles.findAll();
-    res.json(all);
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.post('/', checkAuthHeaderSetUserUnAuthorized, async (req, res, next) => {
   try {
     const resp = await roles.insert(req.body);
@@ -24,12 +15,41 @@ router.post('/', checkAuthHeaderSetUserUnAuthorized, async (req, res, next) => {
   }
 });
 
+router.get('/', async (req, res, next) => {
+  try {
+    const resp = await roles.findAll();
+    res.json(resp);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/:name', async (req, res, next) => {
+  try {
+    const resp = await roles.findByName(req.params.name);
+    res.json(resp);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.patch('/:name', async (req, res, next) => {
+  try {
+    const resp = await roles.update(req.params.name, req.body);
+    res.json(resp);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
 router.delete(
-  '/:id',
+  '/:name',
   checkAuthHeaderSetUserUnAuthorized,
   async (req, res, next) => {
     try {
-      const resp = await roles.delete(req.params.id);
+      const resp = await roles.delete(req.params.name);
       res.json(resp);
     } catch (error) {
       next(error);

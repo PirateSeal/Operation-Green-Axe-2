@@ -18,12 +18,12 @@ module.exports = {
   findById(id) {
     return db('roles').where('id', id).first();
   },
-  async update(id, role) {
-    const rows = await db('roles').where('id', id).update(role, '*');
+  async update(name, role) {
+    const rows = await db('roles').where('name', name).update(role, '*');
     return rows[0];
   },
-  async delete(id) {
-    return db('roles').where('id', id).del();
+  async delete(name) {
+    return db('roles').where('name', name).del();
   },
   insert(role) {
     return insertIntoTableAndValidate('roles', role, schema);
