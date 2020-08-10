@@ -15,7 +15,8 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        paths: ['src'],
+        extensions: ['.vue'],
+        paths: ['./src'],
       },
     },
   },

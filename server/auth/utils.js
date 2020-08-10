@@ -5,7 +5,9 @@ function create(user) {
     jwt.sign(
       user,
       process.env.TOKEN_SECRET,
-      { expiresIn: '7d' },
+      {
+        expiresIn: '7d',
+      },
       (error, token) => {
         if (error) return reject(error);
         resolve(token);
@@ -23,4 +25,7 @@ function verify(token) {
   });
 }
 
-module.exports = { create, verify };
+module.exports = {
+  create,
+  verify,
+};

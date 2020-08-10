@@ -1,5 +1,7 @@
 <template>
-  <p>{{$route.params.token}}</p>
+  <div>
+    <h1>Admin view</h1>
+  </div>
 </template>
 
 <script>

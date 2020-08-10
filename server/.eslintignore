@@ -1,0 +1,6 @@
+{
+  "ignorePatterns": [
+    "**/tests/**.js",
+    "**/tests/**.json"
+  ]
+}

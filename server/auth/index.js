@@ -1,11 +1,24 @@
 const express = require('express');
 const passport = require('passport');
 
+require('../passport/google');
+
 const { create } = require('./utils');
 
 const router = express.Router();
 
-require('../passport/google');
+router.get('/isAdmin', (req, res) => {
+  if (req.user) {
+    if (req.user.admin === true) {
+      return res.json({
+        isAdmin: true,
+      });
+    }
+  }
+  return res.json({
+    isAdmin: false,
+  });
+});
 
 router.get(
   '/google',
