@@ -1,2 +1,4 @@
 
 .idea/
+**/seeds/me.js
+**/results/**
