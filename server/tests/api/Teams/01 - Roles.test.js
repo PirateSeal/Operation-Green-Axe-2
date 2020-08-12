@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const request = require('supertest');
-const app = require('../app');
-const knex = require('../database/index');
+const app = require('../../../app');
+const knex = require('../../../database/index');
 
 const token = process.env.JWT_TOKEN;
 
