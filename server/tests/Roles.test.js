@@ -39,7 +39,6 @@ describe('Role endpoints', () => {
         expect(res.body.name).toBe(role1.name);
         expect(res.body.short).toBe(role1.short);
         role1ID = res.body.id;
-        console.log(res.body);
       });
   });
 
@@ -50,7 +49,6 @@ describe('Role endpoints', () => {
       .set('Authorization', `Bearer ${token}`)
       .set('Accept', 'application/json')
       .expect((res) => {
-        console.log(res.body);
         expect(res.status).toBe(200);
         expect(res.body.name).toBe(role1.name);
         expect(res.body.short).toBe(role1.short);
@@ -65,8 +63,6 @@ describe('Role endpoints', () => {
       .set('Accept', 'application/json')
       .send(updatedRole)
       .expect((res) => {
-        console.log(res.status);
-        console.log(res.body);
         expect(res.status).toBe(200);
         expect(res.body.name).toBe(updatedRole.name);
         expect(res.body.short).toBe(updatedRole.short);
