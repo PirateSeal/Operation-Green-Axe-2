@@ -6,12 +6,12 @@ const { checkAuthHeaderSetUserUnAuthorized } = require('../middlewares');
 
 const roles = require('../queries/Teams/roles');
 
-router.post('/', checkAuthHeaderSetUserUnAuthorized, async (req, res, next) => {
+router.post('/', checkAuthHeaderSetUserUnAuthorized, async (req, res) => {
   try {
     const resp = await roles.insert(req.body);
-    res.json(resp);
+    res.status(201).send(resp);
   } catch (error) {
-    next(error);
+    res.status(409).send(error);
   }
 });
 
@@ -24,35 +24,58 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:name', async (req, res, next) => {
-  try {
-    const resp = await roles.findByName(req.params.name);
-    res.json(resp);
-  } catch (error) {
-    next(error);
+router.get('/:id(\\d+)', async (req, res) => {
+  const resp = await roles.findById(req.params.id);
+  switch (resp) {
+    case null:
+    case undefined:
+      res.status(404).send(`Couldn't find this role`);
+      break;
+    default:
+      res.json(resp);
+      break;
   }
 });
 
-router.patch('/:name', async (req, res, next) => {
-  try {
-    const resp = await roles.update(req.params.name, req.body);
-    res.json(resp);
-  } catch (error) {
-    next(error);
+router.get('/:name', async (req, res) => {
+  const resp = await roles.findByName(req.params.name);
+  switch (resp) {
+    case null:
+    case undefined:
+      res.status(404).send(`Couldn't find this role`);
+      break;
+    default:
+      res.json(resp);
+      break;
   }
 });
 
-
+router.patch('/:id(\\d+)', async (req, res) => {
+  const resp = await roles.update(req.params.id, req.body);
+  switch (resp) {
+    case null:
+    case undefined:
+      res.status(404).send(`Couldn't find this role`);
+      break;
+    default:
+      res.json(resp);
+      break;
+  }
+});
 
 router.delete(
-  '/:name',
+  '/:id(\\d+)',
   checkAuthHeaderSetUserUnAuthorized,
-  async (req, res, next) => {
-    try {
-      const resp = await roles.delete(req.params.name);
-      res.json(resp);
-    } catch (error) {
-      next(error);
+  async (req, res) => {
+    const resp = await roles.delete(req.params.id);
+    switch (resp) {
+      case null:
+      case undefined:
+        res.status(404).send(`Couldn't find this role`);
+        break;
+      default:
+        res.json(resp);
+        break;
     }
   },
 );
