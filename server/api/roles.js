@@ -37,7 +37,7 @@ router.get('/:id(\\d+)', async (req, res) => {
   }
 });
 
-router.get('/:name', async (req, res) => {
+router.get('/:name([a-zA-Z])', async (req, res) => {
   const resp = await roles.findByName(req.params.name);
   switch (resp) {
     case null:
