@@ -26,18 +26,17 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
-      - run : docker-compose up -d
+      - run: docker-compose up -d
         working-directory: server/database
-        env: 
+        env:
           POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
           POSTGRES_USER: ${{secrets.POSTGRES_USER}}
           POSTGRES_DB: ${{secrets.POSTGRES_DB}}
         name: Create database
-        
+
       - run: yarn
         name: install dependencies
-      
+
       - run: yarn test
         env:
           GOOGLE_CLIENT_ID: ${{secrets.GGL_LOG}}
@@ -48,4 +47,3 @@ jobs:
           POSTGRES_USER: ${{secrets.POSTGRES_USER}}
           POSTGRES_DB: ${{secrets.POSTGRES_DB}}
         name: run tests
-          

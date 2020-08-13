@@ -1,10 +1,10 @@
-exports.up = (knex, Promise) => {
-  return knex.schema.createTable("questionnaires", (table) => {
+exports.up = (knex) => {
+  return knex.schema.createTable('questionnaires', (table) => {
     table.increments();
-    table.text("name").unique().notNullable();
+    table.text('name').unique().notNullable();
   });
 };
 
-exports.down = (knex, Promise) => {
-  return knex.schema.dropTable("questionnaires");
+exports.down = (knex) => {
+  return knex.schema.dropTable('questionnaires');
 };
